@@ -16,7 +16,7 @@ final class RandomUserChallengeUITestsLaunchTests: XCTestCase {
     }
 
     @MainActor
-    func testLaunch() throws {
+    func testLaunch() {
         let app = XCUIApplication()
         app.launch()
 
@@ -28,4 +28,5 @@ final class RandomUserChallengeUITestsLaunchTests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
     }
+
 }
