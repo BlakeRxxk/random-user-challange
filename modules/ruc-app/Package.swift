@@ -10,6 +10,8 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(name: "RUCApp", targets: ["RUCApp"]),
         .library(name: "UsersList", targets: ["UsersList"]),
+        .library(name: "RandomUserDomain", targets: ["RandomUserDomain"]),
+        .library(name: "RandomUserData", targets: ["RandomUserData"]),
     ],
     dependencies: [
         .package(name: "RUCCore", path: "../ruc-core"),
@@ -33,6 +35,8 @@ let package = Package(
                 .product(name: "RUCCore", package: "RUCCore"),
             ],
         ),
+        .target(name: "RandomUserDomain"),
+        .target(name: "RandomUserData", dependencies: ["RandomUserDomain"]),
         .testTarget(
             name: "RUCAppTests",
             dependencies: ["RUCApp"],
