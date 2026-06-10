@@ -59,4 +59,5 @@ public final class HTTPClient: HTTPClientProtocol {
 
         return apiURLEncodedInURL(request: request, parameters: parameters).0
     }
+
 }

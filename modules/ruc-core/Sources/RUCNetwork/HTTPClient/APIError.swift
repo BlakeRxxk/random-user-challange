@@ -36,4 +36,5 @@ public struct APIError: Error {
 
     static let unknownError = APIError("unknown")
     static let parsingError = APIError("parsingError")
+
 }

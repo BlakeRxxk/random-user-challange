@@ -8,14 +8,14 @@ let package = Package(
     platforms: [.iOS(.v17)],
     products: [
         .library(name: "RUCCore", targets: ["RUCCore"]),
-        .library(name: "RUCNetwork", targets: ["RUCNetwork"])
+        .library(name: "RUCNetwork", targets: ["RUCNetwork"]),
     ],
     targets: [
         .target(name: "RUCCore"),
         .target(name: "RUCNetwork"),
         .testTarget(
             name: "RUCCoreTests",
-            dependencies: ["RUCCore"]
+            dependencies: ["RUCCore"],
         ),
-    ]
+    ],
 )

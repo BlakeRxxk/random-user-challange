@@ -2,7 +2,7 @@ import XCTest
 @testable import RUCApp
 
 final class ruc_appTests: XCTestCase {
-    func testExample() throws {
+    func testExample() {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest
 

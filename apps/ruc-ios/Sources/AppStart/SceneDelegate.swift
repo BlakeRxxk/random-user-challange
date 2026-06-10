@@ -3,8 +3,9 @@
 //  RandomUserChallenge
 //
 
-import UIKit
 import RUCApp
+import UIKit
+
 // MARK: - SceneDelegate
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {

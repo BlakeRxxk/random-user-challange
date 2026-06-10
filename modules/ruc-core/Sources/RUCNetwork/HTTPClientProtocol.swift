@@ -14,4 +14,5 @@ public protocol HTTPClientProtocol: Sendable {
         _ route: Routable,
         parameters: [String: Any]?,
     ) async throws -> Response
+
 }

@@ -2,7 +2,7 @@ import XCTest
 @testable import RUCCore
 
 final class RUCCoreTests: XCTestCase {
-    func testExample() throws {
+    func testExample() {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest
 
