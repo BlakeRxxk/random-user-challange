@@ -4,7 +4,7 @@
 //
 
 import UIKit
-
+import RUCApp
 // MARK: - SceneDelegate
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {

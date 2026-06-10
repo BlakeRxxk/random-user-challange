@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AACF7A862FD99E1F00FB1D57 /* RUCApp in Frameworks */ = {isa = PBXBuildFile; productRef = AACF7A852FD99E1F00FB1D57 /* RUCApp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		AACF7A4B2FD98B4900FB1D57 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AACF7A862FD99E1F00FB1D57 /* RUCApp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 			);
 			name = RandomUserChallenge;
 			packageProductDependencies = (
+				AACF7A852FD99E1F00FB1D57 /* RUCApp */,
 			);
 			productName = RandomUserChallenge;
 			productReference = AACF7A312FD98B4700FB1D57 /* RandomUserChallenge.app */;
@@ -208,6 +214,10 @@
 			);
 			mainGroup = AACF7A282FD98B4700FB1D57;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AACF7A832FD9984600FB1D57 /* XCLocalSwiftPackageReference "../../modules/ruc-core" */,
+				AACF7A842FD99E1F00FB1D57 /* XCLocalSwiftPackageReference "../../modules/ruc-app" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AACF7A322FD98B4700FB1D57 /* Products */;
 			projectDirPath = "";
@@ -587,6 +597,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		AACF7A832FD9984600FB1D57 /* XCLocalSwiftPackageReference "../../modules/ruc-core" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../modules/ruc-core";
+		};
+		AACF7A842FD99E1F00FB1D57 /* XCLocalSwiftPackageReference "../../modules/ruc-app" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../modules/ruc-app";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AACF7A852FD99E1F00FB1D57 /* RUCApp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RUCApp;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AACF7A292FD98B4700FB1D57 /* Project object */;
 }

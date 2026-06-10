@@ -1,15 +1,14 @@
 //
 //  ViewController.swift
-//  RandomUserChallenge
+//  RUCApp
 //
 
 import UIKit
 
-final class ViewController: UIViewController {
+public final class ViewController: UIViewController {
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .cyan
     }
-
 }
