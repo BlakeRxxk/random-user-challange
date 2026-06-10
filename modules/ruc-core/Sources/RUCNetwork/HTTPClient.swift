@@ -24,7 +24,7 @@ public final class HTTPClient: HTTPClientProtocol {
         _ route: Routable,
         parameters: [String: Any]? = nil,
     ) async throws -> T {
-        let request = urlRequest(method: method, route: route, parameters: parameters, requestBody: route.requestBody)
+        let request = urlRequest(method: method, route: route, parameters: parameters)
         let (data, response) = try await session.data(for: request)
 
         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 500
