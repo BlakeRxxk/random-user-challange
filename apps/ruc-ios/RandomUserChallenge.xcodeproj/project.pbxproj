@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AACC614C2FD9BB9D00926FF4 /* RUCUI in Frameworks */ = {isa = PBXBuildFile; productRef = AACC614B2FD9BB9D00926FF4 /* RUCUI */; };
 		AACF7A862FD99E1F00FB1D57 /* RUCApp in Frameworks */ = {isa = PBXBuildFile; productRef = AACF7A852FD99E1F00FB1D57 /* RUCApp */; };
+		AACF7A892FD9AE3F00FB1D57 /* RUCCore in Frameworks */ = {isa = PBXBuildFile; productRef = AACF7A882FD9AE3F00FB1D57 /* RUCCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AACC614C2FD9BB9D00926FF4 /* RUCUI in Frameworks */,
+				AACF7A892FD9AE3F00FB1D57 /* RUCCore in Frameworks */,
 				AACF7A862FD99E1F00FB1D57 /* RUCApp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,6 +100,7 @@
 				AACF7A332FD98B4700FB1D57 /* Sources */,
 				AACF7A4D2FD98B4900FB1D57 /* Tests */,
 				AACF7A572FD98B4900FB1D57 /* UITests */,
+				AACF7A872FD9AE3F00FB1D57 /* Frameworks */,
 				AACF7A322FD98B4700FB1D57 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +113,13 @@
 				AACF7A542FD98B4900FB1D57 /* RandomUserChallengeUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AACF7A872FD9AE3F00FB1D57 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +143,8 @@
 			name = RandomUserChallenge;
 			packageProductDependencies = (
 				AACF7A852FD99E1F00FB1D57 /* RUCApp */,
+				AACF7A882FD9AE3F00FB1D57 /* RUCCore */,
+				AACC614B2FD9BB9D00926FF4 /* RUCUI */,
 			);
 			productName = RandomUserChallenge;
 			productReference = AACF7A312FD98B4700FB1D57 /* RandomUserChallenge.app */;
@@ -217,6 +231,7 @@
 			packageReferences = (
 				AACF7A832FD9984600FB1D57 /* XCLocalSwiftPackageReference "../../modules/ruc-core" */,
 				AACF7A842FD99E1F00FB1D57 /* XCLocalSwiftPackageReference "../../modules/ruc-app" */,
+				AACC614A2FD9BB9D00926FF4 /* XCLocalSwiftPackageReference "../../modules/ruc-ui" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AACF7A322FD98B4700FB1D57 /* Products */;
@@ -599,6 +614,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		AACC614A2FD9BB9D00926FF4 /* XCLocalSwiftPackageReference "../../modules/ruc-ui" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../modules/ruc-ui";
+		};
 		AACF7A832FD9984600FB1D57 /* XCLocalSwiftPackageReference "../../modules/ruc-core" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../modules/ruc-core";
@@ -610,9 +629,18 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AACC614B2FD9BB9D00926FF4 /* RUCUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RUCUI;
+		};
 		AACF7A852FD99E1F00FB1D57 /* RUCApp */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RUCApp;
+		};
+		AACF7A882FD9AE3F00FB1D57 /* RUCCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AACF7A832FD9984600FB1D57 /* XCLocalSwiftPackageReference "../../modules/ruc-core" */;
+			productName = RUCCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
