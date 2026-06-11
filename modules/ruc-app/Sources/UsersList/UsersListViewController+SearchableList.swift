@@ -16,6 +16,20 @@ extension UsersListViewController: UISearchResultsUpdating {
     public func updateSearchResults(for _: UISearchController) { }
 }
 
+// MARK: - UsersListViewController + UISearchControllerDelegate
+
+extension UsersListViewController: UISearchControllerDelegate {
+    public func didPresentSearchController(_: UISearchController) {
+        specializedView.refreshControl.isEnabled = false
+        specializedView.collectionView?.prefetchDataSource = nil
+    }
+
+    public func didDismissSearchController(_: UISearchController) {
+        specializedView.refreshControl.isEnabled = true
+        specializedView.collectionView?.prefetchDataSource = self
+    }
+}
+
 // MARK: - UsersListViewController + UISearchBarDelegate
 
 extension UsersListViewController: UISearchBarDelegate {

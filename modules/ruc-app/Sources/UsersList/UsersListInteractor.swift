@@ -63,27 +63,25 @@ final class UsersListInteractor: PresentableInteractor<UsersListPresentable>, @u
     private var searchTask: Task<Void, Never>?
     private var deletionTask: Task<Void, Never>?
 
+    private var paginationState = PaginationState()
+
 }
 
 // MARK: UsersListPresentableListener
 
 extension UsersListInteractor: UsersListPresentableListener {
 
+    // MARK: Internal
+
     func fetchUsers() {
         fetchingTask?.cancel()
-        fetchingTask = Task { [weak usersRepository] in
-            do {
-                let result = try await usersRepository?.fetchUsers(page: 1, results: 40)
-                let models = result?.compactMap(UserCellModel.init) ?? []
-                await MainActor.run {
-                    presenter.display(users: models)
-                }
-            } catch {
-                await MainActor.run {
-                    presenter.displayError()
-                }
-            }
-        }
+        paginationState.reset()
+        fetchPage()
+    }
+
+    func fetchNextPageUsers() {
+        guard paginationState.canLoadNextPage else { return }
+        fetchPage()
     }
 
     func search(with text: String) {
@@ -124,6 +122,34 @@ extension UsersListInteractor: UsersListPresentableListener {
             } catch {
                 await MainActor.run {
                     presenter.displayError()
+                }
+            }
+        }
+    }
+
+    // MARK: Private
+
+    private func resetState() {
+        paginationState.reset()
+    }
+
+    private func fetchPage() {
+        paginationState.startLoading()
+        let page = paginationState.page
+
+        fetchingTask = Task { [weak self] in
+            guard let self else { return }
+            do {
+                let result = try await usersRepository.fetchUsers(page: page, results: 40)
+                let models = result.compactMap(UserCellModel.init)
+                await MainActor.run {
+                    self.paginationState.finishLoading(receivedCount: models.count, pageSize: 40)
+                    self.presenter.display(users: models)
+                }
+            } catch {
+                await MainActor.run {
+                    self.paginationState.isLoading = false
+                    self.presenter.displayError()
                 }
             }
         }

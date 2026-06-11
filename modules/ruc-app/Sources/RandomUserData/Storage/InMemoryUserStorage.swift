@@ -15,7 +15,9 @@ public actor InMemoryUserStorage: RandomUserStorage {
     // MARK: Public
 
     public func save(_ users: [User]) {
-        self.users = users
+        let existingIDs = Set(self.users.map(\.id))
+        let newUsers = users.filter { !existingIDs.contains($0.id) }
+        self.users.append(contentsOf: newUsers)
     }
 
     public func loadUsers() -> [User] {
@@ -41,6 +43,10 @@ public actor InMemoryUserStorage: RandomUserStorage {
 
     public func get(userId: String) async throws -> User? {
         users.first { $0.id.uuidString == userId }
+    }
+
+    public func clear() {
+        users.removeAll()
     }
 
     // MARK: Private

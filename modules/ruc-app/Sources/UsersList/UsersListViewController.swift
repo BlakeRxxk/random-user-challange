@@ -14,6 +14,7 @@ private typealias UsersSnapshot = NSDiffableDataSourceSnapshot<UsersListView.Sec
 
 public protocol UsersListPresentableListener: AnyObject {
     func fetchUsers()
+    func fetchNextPageUsers()
     func search(with text: String)
     func delete(user userID: String)
     @MainActor
@@ -46,6 +47,7 @@ public final class UsersListViewController: ViewController<UsersListView>, Users
 
         configureDataSource()
         configureSwipeActions()
+        setupSearchController(with: [])
         specializedView.collectionView?.delegate = self
         specializedView.collectionView?.prefetchDataSource = self
         specializedView.refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
@@ -53,7 +55,6 @@ public final class UsersListViewController: ViewController<UsersListView>, Users
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupSearchController(with: [])
         listener?.fetchUsers()
     }
 
@@ -63,6 +64,7 @@ public final class UsersListViewController: ViewController<UsersListView>, Users
 
     @objc
     private func handleRefresh(_: UIRefreshControl) {
+        guard specializedView.refreshControl.isEnabled else { return }
         listener?.fetchUsers()
     }
 
@@ -130,8 +132,15 @@ extension UsersListViewController: UICollectionViewDelegate { }
 // MARK: UICollectionViewDataSourcePrefetching
 
 extension UsersListViewController: UICollectionViewDataSourcePrefetching {
-    public func collectionView(_: UICollectionView, prefetchItemsAt _: [IndexPath]) {
-        //
+    public func collectionView(_: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        guard let snapshot = dataSource?.snapshot() else { return }
+
+        if
+            let maxIndex = indexPaths.map(\.item).max(),
+            maxIndex >= snapshot.numberOfItems - 5
+        {
+            listener?.fetchNextPageUsers()
+        }
     }
 }
 

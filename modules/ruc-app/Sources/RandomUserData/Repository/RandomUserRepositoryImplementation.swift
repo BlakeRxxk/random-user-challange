@@ -30,9 +30,11 @@ extension RandomUserRepositoryImplementation: RandomUserRepository {
     public func fetchUsers(page: Int, results: Int) async throws -> [User] {
         let usersDTO = try await networkClient.fetchUsers(page: page, results: results)
         let users = usersDTO.compactMap(UserMapper.map)
+        if page == 1 {
+            try await storage.clear()
+        }
         try await storage.save(users)
-
-        return users
+        return try await storage.loadUsers()
     }
 
     public func searchUsers(query: String) async throws -> [User] {
