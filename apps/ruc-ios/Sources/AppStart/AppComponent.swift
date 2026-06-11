@@ -3,6 +3,7 @@
 //  RandomUserChallenge
 //
 
+import RandomUserData
 import RUCApp
 import RUCCore
 
@@ -12,6 +13,14 @@ public final class AppComponent: Component<EmptyDependency>, RootDependency {
 
     init() {
         super.init(dependency: EmptyComponent())
+    }
+
+    // MARK: Public
+
+    public var coreDataStorage: RandomUserStorage {
+        shared {
+            PersistenceController.shared
+        }
     }
 
     // MARK: Internal

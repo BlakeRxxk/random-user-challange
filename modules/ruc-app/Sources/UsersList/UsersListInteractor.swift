@@ -137,7 +137,7 @@ extension UsersListInteractor: UsersListPresentableListener {
                 let result = try await usersRepository.fetchUsers(page: page, results: 40)
                 let models = result.compactMap(UserCellModel.init)
                 await MainActor.run {
-                    self.paginationState.finishLoading(receivedCount: models.count, pageSize: 40)
+                    self.paginationState.finishLoading()
                     self.presenter.display(users: models)
                 }
             } catch {

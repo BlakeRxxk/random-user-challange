@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24512" systemVersion="25D2128" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="UserEntity" representedClassName="UserEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="sortIndex" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isDeletedFlag" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="nameTitle" optional="YES" attributeType="String"/>
+        <attribute name="nameFirst" optional="YES" attributeType="String"/>
+        <attribute name="nameLast" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="cell" optional="YES" attributeType="String"/>
+        <attribute name="nationality" optional="YES" attributeType="String"/>
+        <attribute name="loginUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="loginUsername" optional="YES" attributeType="String"/>
+        <attribute name="loginPassword" optional="YES" attributeType="String"/>
+        <attribute name="loginSalt" optional="YES" attributeType="String"/>
+        <attribute name="loginMd5" optional="YES" attributeType="String"/>
+        <attribute name="loginSha1" optional="YES" attributeType="String"/>
+        <attribute name="loginSha256" optional="YES" attributeType="String"/>
+        <attribute name="dobDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dobAge" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="registeredDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="registeredAge" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pictureLarge" optional="YES" attributeType="String"/>
+        <attribute name="pictureMedium" optional="YES" attributeType="String"/>
+        <attribute name="pictureThumbnail" optional="YES" attributeType="String"/>
+        <attribute name="locationCity" optional="YES" attributeType="String"/>
+        <attribute name="locationState" optional="YES" attributeType="String"/>
+        <attribute name="locationCountry" optional="YES" attributeType="String"/>
+        <attribute name="locationPostcode" optional="YES" attributeType="String"/>
+        <attribute name="locationStreetName" optional="YES" attributeType="String"/>
+        <attribute name="locationStreetNumber" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="locationLatitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="locationLongitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="locationTimezoneOffset" optional="YES" attributeType="String"/>
+        <attribute name="locationTimezoneDescription" optional="YES" attributeType="String"/>
+        <attribute name="identifierName" optional="YES" attributeType="String"/>
+        <attribute name="identifierValue" optional="YES" attributeType="String"/>
+    </entity>
 </model>

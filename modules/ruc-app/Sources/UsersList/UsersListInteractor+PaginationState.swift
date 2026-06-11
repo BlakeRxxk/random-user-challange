@@ -25,10 +25,10 @@ extension UsersListInteractor {
             isLoading = true
         }
 
-        mutating func finishLoading(receivedCount: Int, pageSize: Int) {
+        mutating func finishLoading() {
             page += 1
             isLoading = false
-            hasMore = receivedCount >= pageSize
+            hasMore = true
         }
     }
 }

@@ -17,7 +17,9 @@ private let kRequestTimeout = 20.0
 
 // MARK: - RootDependency
 
-public protocol RootDependency: Dependency { }
+public protocol RootDependency: Dependency {
+    var coreDataStorage: RandomUserStorage { get }
+}
 
 // MARK: - RootComponent
 
@@ -38,7 +40,7 @@ public final class RootComponent: Component<RootDependency>, UsersListDependency
         shared {
             RandomUserRepositoryImplementation(
                 networkClient: .init(httpClient: networkClient),
-                storage: InMemoryUserStorage(),
+                storage: dependency.coreDataStorage,
             )
         }
     }
