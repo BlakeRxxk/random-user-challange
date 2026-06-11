@@ -36,7 +36,7 @@ struct UserView: SwiftUI.View {
             output?.didTapButton(with: viewModel)
         } label: {
             HStack {
-                ProfileRow(name: viewModel.name, subtitle: viewModel.phone, avatarURL: viewModel.avatarURL)
+                ProfileRow(name: viewModel.name, subtitle: viewModel.cell, avatarURL: viewModel.avatarURL, email: viewModel.email)
 
                 Spacer()
                 Image(systemName: "chevron.right")

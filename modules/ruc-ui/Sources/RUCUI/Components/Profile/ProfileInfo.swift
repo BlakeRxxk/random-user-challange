@@ -7,7 +7,8 @@ import SwiftUI
 
 struct ProfileInfo: SwiftUI.View {
     let title: String
-    let subtitle: String?
+    let subtitle: String
+    let email: String
 
     var body: some SwiftUI.View {
         VStack(alignment: .leading, spacing: 4) {
@@ -15,13 +16,11 @@ struct ProfileInfo: SwiftUI.View {
                 .font(.system(size: 20, weight: .bold))
                 .foregroundStyle(.primary)
 
-            if let subtitle {
-                Text(subtitle)
-                    .font(.system(size: 15, weight: .regular))
-                    .foregroundStyle(Color(.systemGray))
-            }
+            Text(subtitle)
+                .font(.system(size: 15, weight: .regular))
+                .foregroundStyle(Color(.systemGray))
 
-            Text("mail@email.com")
+            Text(email)
                 .font(.system(size: 15, weight: .regular))
                 .foregroundStyle(Color(.systemGray))
         }
