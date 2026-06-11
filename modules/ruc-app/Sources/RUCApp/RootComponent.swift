@@ -27,7 +27,7 @@ public final class RootComponent: Component<RootDependency>, UsersListDependency
             configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            return HTTPClient(configuration: configuration, decoder: decoder, logger: TmpLogger())
+            return HTTPClient(configuration: configuration, decoder: decoder, logger: OSLogger())
         }
     }
 
@@ -37,12 +37,4 @@ public final class RootComponent: Component<RootDependency>, UsersListDependency
         UsersListBuilder(dependency: self)
     }
 
-}
-
-// MARK: - TmpLogger
-
-final class TmpLogger: Logger {
-    func log(_ message: String, level _: LogLevel) {
-        print(message)
-    }
 }
