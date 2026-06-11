@@ -5,6 +5,7 @@
 
 import RandomUserDomain
 import RUCCore
+import UserDetail
 
 // MARK: - UsersListListener
 
@@ -14,6 +15,7 @@ public protocol UsersListListener: AnyObject { }
 
 public protocol UsersListRouting: ViewableRouting {
     func routeToDetail(for userID: String)
+    func dismissUserDetail()
 }
 
 // MARK: - UsersListPresentable
@@ -27,7 +29,7 @@ public protocol UsersListPresentable: Presentable {
 }
 
 // MARK: - UsersListInteractor
-
+// swiftlint:disable:next no_unchecked_sendable
 final class UsersListInteractor: PresentableInteractor<UsersListPresentable>, UsersListInteractable, @unchecked Sendable {
 
     // MARK: Lifecycle
@@ -102,6 +104,11 @@ extension UsersListInteractor: UsersListPresentableListener {
     func select(user userID: String) {
         print(router)
         router?.routeToDetail(for: userID)
+    }
+
+    @MainActor
+    func onDismiss() {
+        router?.dismissUserDetail()
     }
 
 }

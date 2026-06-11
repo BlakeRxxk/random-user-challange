@@ -4,10 +4,12 @@
 //
 
 import RUCCore
+import UIKit
+import UserDetail
 
 // MARK: - UsersListInteractable
 
-protocol UsersListInteractable: Interactable {
+protocol UsersListInteractable: Interactable, UserDetailListener {
     var router: UsersListRouting? { get set }
     var listener: UsersListListener? { get set }
 }
@@ -22,13 +24,22 @@ protocol UsersListViewControllable: ViewControllable { }
 @MainActor
 final class UsersListRouter: ViewableRouter<UsersListInteractor, UsersListViewController> {
 
-    override init(
+    // MARK: Lifecycle
+
+    init(
+        userDetailBuilder: UserDetailBuildable,
         interactor: UsersListInteractor,
         viewController: UsersListViewController,
     ) {
+        self.userDetailBuilder = userDetailBuilder
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
+
+    // MARK: Private
+
+    private let userDetailBuilder: UserDetailBuildable
+    private var userDetailRouter: UserDetailRouting?
 
 }
 
@@ -36,6 +47,22 @@ final class UsersListRouter: ViewableRouter<UsersListInteractor, UsersListViewCo
 
 extension UsersListRouter: UsersListRouting {
     func routeToDetail(for userID: String) {
-        print(userID)
+        guard userDetailRouter == nil else { return }
+
+        let router = userDetailBuilder.build(
+            with: interactor,
+            selected: userID,
+        )
+        userDetailRouter = router
+        attach(child: router)
+        let root = UINavigationController(rootViewController: router.viewControllable.uiViewController)
+        viewController.uiViewController.present(root, animated: true)
+    }
+
+    func dismissUserDetail() {
+        guard let router = userDetailRouter else { return }
+        userDetailRouter = nil
+        detach(child: router)
+        viewController.uiViewController.dismiss(animated: true)
     }
 }

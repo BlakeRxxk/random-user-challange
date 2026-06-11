@@ -1,8 +1,6 @@
 //
 //  UIColor+Tools.swift
-//  ruc-ui
-//
-//  Created by Oleg Kurgaev on 11.06.26.
+//  RUCUI
 //
 
 import UIKit

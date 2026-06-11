@@ -7,6 +7,7 @@ import RandomUserData
 import RandomUserDomain
 import RUCCore
 import RUCNetwork
+import UserDetail
 
 // MARK: - UsersListDependency
 
@@ -17,8 +18,11 @@ public protocol UsersListDependency: Dependency {
 
 // MARK: - UsersListComponent
 
-public final class UsersListComponent: Component<UsersListDependency> {
-    var usersRepository: RandomUserRepository {
+public final class UsersListComponent: Component<UsersListDependency>, UserDetailDependency {
+
+    // MARK: Public
+
+    public var usersRepository: RandomUserRepository {
         shared {
             RandomUserRepositoryImplementation(
                 networkClient: .init(httpClient: dependency.networkClient),
@@ -27,4 +31,11 @@ public final class UsersListComponent: Component<UsersListDependency> {
 //            RandomUserAPIClient(httpClient: dependency.networkClient)
         }
     }
+
+    // MARK: Internal
+
+    var userDetailBuilder: UserDetailBuildable {
+        UserDetailBuilder(dependency: self)
+    }
+
 }

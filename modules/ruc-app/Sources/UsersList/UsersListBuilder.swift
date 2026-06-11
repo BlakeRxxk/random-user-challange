@@ -26,6 +26,10 @@ public final class UsersListBuilder: Builder<UsersListDependency>, UsersListBuil
 
         interactor.listener = listener
 
-        return UsersListRouter(interactor: interactor, viewController: viewController)
+        return UsersListRouter(
+            userDetailBuilder: component.userDetailBuilder,
+            interactor: interactor,
+            viewController: viewController,
+        )
     }
 }
