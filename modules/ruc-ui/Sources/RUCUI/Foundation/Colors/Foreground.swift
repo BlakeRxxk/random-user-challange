@@ -9,12 +9,15 @@ import UIKit
 
 public enum ForegroundType {
     case avatar
+    case refreshControl
 
     // MARK: Internal
 
     var color: UIColor {
         switch self {
         case .avatar:
+            Palette.kiwi700
+        case .refreshControl:
             Palette.kiwi700
         }
     }
