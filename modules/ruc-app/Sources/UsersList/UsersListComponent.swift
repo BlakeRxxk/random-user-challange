@@ -20,8 +20,10 @@ public protocol UsersListDependency: Dependency {
 public final class UsersListComponent: Component<UsersListDependency> {
     var usersRepository: RandomUserRepository {
         shared {
-            RandomUserRepositoryImplementation(networkClient: .init(httpClient: dependency.networkClient),
-                                               storage: InMemoryUserStorage())
+            RandomUserRepositoryImplementation(
+                networkClient: .init(httpClient: dependency.networkClient),
+                storage: InMemoryUserStorage(),
+            )
 //            RandomUserAPIClient(httpClient: dependency.networkClient)
         }
     }

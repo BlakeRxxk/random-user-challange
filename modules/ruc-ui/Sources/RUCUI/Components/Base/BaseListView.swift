@@ -24,12 +24,12 @@ open class BaseListView: View {
         config.separatorConfiguration.color = UIColor.border(.subtle)
         config.separatorConfiguration.topSeparatorVisibility = .hidden
         let layout = UICollectionViewCompositionalLayout.list(using: config)
-        
+
         collectionView = UICollectionView(
             frame: bounds,
             collectionViewLayout: layout,
         )
-        
+
         guard let collectionView else { return }
         addSubview(collectionView)
     }

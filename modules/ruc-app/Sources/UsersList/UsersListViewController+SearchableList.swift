@@ -19,9 +19,7 @@ extension UsersListViewController: UISearchResultsUpdating {
 // MARK: - UsersListViewController + UISearchBarDelegate
 
 extension UsersListViewController: UISearchBarDelegate {
-    public func searchBar(_: UISearchBar, selectedScopeButtonIndexDidChange _: Int) {
-
-    }
+    public func searchBar(_: UISearchBar, selectedScopeButtonIndexDidChange _: Int) { }
 
     public func searchBar(_: UISearchBar, textDidChange searchText: String) {
         listener?.search(with: searchText)

@@ -8,9 +8,11 @@ import RandomUserDomain
 
 public actor InMemoryUserStorage: RandomUserStorage {
 
-    private var users: [User] = []
+    // MARK: Lifecycle
 
-    public init() {}
+    public init() { }
+
+    // MARK: Public
 
     public func save(_ users: [User]) {
         self.users = users
@@ -27,8 +29,13 @@ public actor InMemoryUserStorage: RandomUserStorage {
 
         return users.filter {
             $0.name.first.localizedCaseInsensitiveContains(query)
-            || $0.name.last.localizedCaseInsensitiveContains(query)
-            || $0.email.localizedCaseInsensitiveContains(query)
+                || $0.name.last.localizedCaseInsensitiveContains(query)
+                || $0.email.localizedCaseInsensitiveContains(query)
         }
     }
+
+    // MARK: Private
+
+    private var users = [User]()
+
 }

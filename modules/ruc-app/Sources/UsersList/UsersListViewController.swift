@@ -15,7 +15,8 @@ private typealias UsersSnapshot = NSDiffableDataSourceSnapshot<UsersListView.Sec
 public protocol UsersListPresentableListener: AnyObject {
     func fetchUsers()
     func search(with text: String)
-    @MainActor func select(user userID: String)
+    @MainActor
+    func select(user userID: String)
 }
 
 // MARK: - UsersListViewController
@@ -115,38 +116,41 @@ extension UsersListViewController: UICollectionViewDataSourcePrefetching {
 // MARK: UsersListPresentable
 
 extension UsersListViewController: UsersListPresentable {
+
+    // MARK: Public
+
     public func display(users: [UserCellModel]) {
         specializedView.refreshControl.endRefreshing()
         updateSnapshot(with: users)
-        
+
         if users.isEmpty {
             displayEmptyState()
         } else {
             contentUnavailableConfiguration = nil
         }
     }
-    
+
     public func displayError() {
-        
         var errorConfig = UIContentUnavailableConfiguration.empty()
         errorConfig.image = UIImage(systemName: "exclamationmark.circle.fill")
         errorConfig.text = "Something went wrong."
         errorConfig.secondaryText = "Please try again later."
-        
+
         // Create configuration for reload button
         var retryButtonConfig = UIButton.Configuration.plain()
         retryButtonConfig.title = "Try again"
         errorConfig.button = retryButtonConfig
-        
+
         // Define the reload button action
         errorConfig.buttonProperties.primaryAction = UIAction { [weak listener] _ in
             listener?.fetchUsers()
         }
-        
+
         contentUnavailableConfiguration = errorConfig
-        
     }
-    
+
+    // MARK: Private
+
     private func displayEmptyState() {
         var configuration = UIContentUnavailableConfiguration.empty()
         configuration.text = "No Results"
@@ -155,6 +159,7 @@ extension UsersListViewController: UsersListPresentable {
 
         contentUnavailableConfiguration = configuration
     }
+
 }
 
 // MARK: UserRowCellOutput

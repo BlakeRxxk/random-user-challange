@@ -80,7 +80,6 @@ extension UsersListInteractor: UsersListPresentableListener {
     func search(with text: String) {
         searchTask?.cancel()
         searchTask = Task { [weak usersRepository] in
-            
             try? await Task.sleep(nanoseconds: 300_000_000)
             guard !Task.isCancelled else { return }
 
@@ -98,7 +97,7 @@ extension UsersListInteractor: UsersListPresentableListener {
             }
         }
     }
-    
+
     @MainActor
     func select(user userID: String) {
         print(router)
