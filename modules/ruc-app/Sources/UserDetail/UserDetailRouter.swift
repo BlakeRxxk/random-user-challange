@@ -33,8 +33,4 @@ final class UserDetailRouter: ViewableRouter<UserDetailInteractor, UserDetailVie
 
 // MARK: UserDetailRouting
 
-extension UserDetailRouter: UserDetailRouting {
-    func routeToDetail(for userID: String) {
-        print(userID)
-    }
-}
+extension UserDetailRouter: UserDetailRouting {}

@@ -23,6 +23,10 @@ open class BaseListView: View {
         config.showsSeparators = true
         config.separatorConfiguration.color = UIColor.border(.subtle)
         config.separatorConfiguration.topSeparatorVisibility = .hidden
+        config.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
+            self?.swipeActionsProvider?(indexPath)
+        }
+
         let layout = UICollectionViewCompositionalLayout.list(using: config)
 
         collectionView = UICollectionView(
@@ -42,5 +46,7 @@ open class BaseListView: View {
     // MARK: Public
 
     public private(set) var collectionView: UICollectionView?
+
+    public var swipeActionsProvider: ((IndexPath) -> UISwipeActionsConfiguration?)?
 
 }

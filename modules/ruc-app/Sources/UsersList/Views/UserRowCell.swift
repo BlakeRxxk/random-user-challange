@@ -30,6 +30,7 @@ final class UserRowCell: UICollectionViewCell {
         contentConfiguration = UIHostingConfiguration {
             UserView(output: self, viewModel: viewModel)
         }
+        contentView.backgroundColor = .background(.primary)
     }
 
 }

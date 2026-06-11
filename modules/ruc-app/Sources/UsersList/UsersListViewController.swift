@@ -15,6 +15,7 @@ private typealias UsersSnapshot = NSDiffableDataSourceSnapshot<UsersListView.Sec
 public protocol UsersListPresentableListener: AnyObject {
     func fetchUsers()
     func search(with text: String)
+    func delete(user userID: String)
     @MainActor
     func select(user userID: String)
 }
@@ -44,6 +45,7 @@ public final class UsersListViewController: ViewController<UsersListView>, Users
         title = Localized.title
 
         configureDataSource()
+        configureSwipeActions()
         specializedView.collectionView?.delegate = self
         specializedView.collectionView?.prefetchDataSource = self
         specializedView.refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
@@ -97,6 +99,26 @@ public final class UsersListViewController: ViewController<UsersListView>, Users
         snapshot.appendSections([.main])
         snapshot.appendItems(users)
         dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+
+    private func configureSwipeActions() {
+        specializedView.swipeActionsProvider = { [weak self] indexPath in
+            guard let self else { return nil }
+
+            guard let user = dataSource?.itemIdentifier(for: indexPath) else {
+                return nil
+            }
+
+            let delete = UIContextualAction(
+                style: .destructive,
+                title: Localized.delete,
+            ) { [weak listener] _, _, completion in
+                listener?.delete(user: user.id)
+                completion(true)
+            }
+
+            return UISwipeActionsConfiguration(actions: [delete])
+        }
     }
 
 }
@@ -175,5 +197,6 @@ extension UsersListViewController: UserRowCellOutput {
 extension UsersListViewController {
     fileprivate enum Localized {
         static let title = "Random Users".localize()
+        static let delete = "Delete".localize()
     }
 }

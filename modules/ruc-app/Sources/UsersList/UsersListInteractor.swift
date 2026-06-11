@@ -30,7 +30,7 @@ public protocol UsersListPresentable: Presentable {
 
 // MARK: - UsersListInteractor
 // swiftlint:disable:next no_unchecked_sendable
-final class UsersListInteractor: PresentableInteractor<UsersListPresentable>, UsersListInteractable, @unchecked Sendable {
+final class UsersListInteractor: PresentableInteractor<UsersListPresentable>, @unchecked Sendable {
 
     // MARK: Lifecycle
 
@@ -44,6 +44,12 @@ final class UsersListInteractor: PresentableInteractor<UsersListPresentable>, Us
         presenter.listener = self
     }
 
+    deinit {
+        fetchingTask?.cancel()
+        searchTask?.cancel()
+        deletionTask?.cancel()
+    }
+
     // MARK: Internal
 
     weak var router: UsersListRouting?
@@ -55,6 +61,7 @@ final class UsersListInteractor: PresentableInteractor<UsersListPresentable>, Us
 
     private var fetchingTask: Task<Void, Never>?
     private var searchTask: Task<Void, Never>?
+    private var deletionTask: Task<Void, Never>?
 
 }
 
@@ -102,13 +109,33 @@ extension UsersListInteractor: UsersListPresentableListener {
 
     @MainActor
     func select(user userID: String) {
-        print(router)
         router?.routeToDetail(for: userID)
     }
 
+    func delete(user userID: String) {
+        deletionTask?.cancel()
+        deletionTask = Task { [weak usersRepository] in
+            do {
+                let result = try await usersRepository?.deleteUser(with: userID)
+                let models = result?.compactMap(UserCellModel.init) ?? []
+                await MainActor.run {
+                    presenter.display(users: models)
+                }
+            } catch {
+                await MainActor.run {
+                    presenter.displayError()
+                }
+            }
+        }
+    }
+
+}
+
+// MARK: UsersListInteractable
+
+extension UsersListInteractor: UsersListInteractable {
     @MainActor
     func onDismiss() {
         router?.dismissUserDetail()
     }
-
 }

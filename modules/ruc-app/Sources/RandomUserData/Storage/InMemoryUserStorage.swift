@@ -34,6 +34,11 @@ public actor InMemoryUserStorage: RandomUserStorage {
         }
     }
 
+    public func delete(userID: String) async -> [User] {
+        users.removeAll { $0.id.uuidString == userID }
+        return users
+    }
+
     // MARK: Private
 
     private var users = [User]()

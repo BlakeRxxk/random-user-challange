@@ -35,7 +35,11 @@ extension RandomUserRepositoryImplementation: RandomUserRepository {
         return users
     }
 
-    public func searchUsers(query: String) async throws -> [RandomUserDomain.User] {
+    public func searchUsers(query: String) async throws -> [User] {
         try await storage.search(query: query)
+    }
+
+    public func deleteUser(with id: String) async throws -> [User] {
+        await storage.delete(userID: id)
     }
 }
