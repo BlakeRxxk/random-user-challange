@@ -6,7 +6,12 @@
 import Foundation
 import RUCCore
 import RUCNetwork
+
+import RandomUserDomain
+import RandomUserData
+
 import UsersList
+import UserDetail
 
 private let kRequestTimeout = 20.0
 
@@ -16,7 +21,7 @@ public protocol RootDependency: Dependency { }
 
 // MARK: - RootComponent
 
-public final class RootComponent: Component<RootDependency>, UsersListDependency {
+public final class RootComponent: Component<RootDependency>, UsersListDependency, UserDetailDependency {
 
     // MARK: Public
 
@@ -30,11 +35,20 @@ public final class RootComponent: Component<RootDependency>, UsersListDependency
             return HTTPClient(configuration: configuration, decoder: decoder)
         }
     }
+    
+    public var usersRepository: RandomUserRepository {
+        RandomUserRepositoryImplementation(
+            networkClient: .init(httpClient: networkClient),
+            storage: InMemoryUserStorage(),
+        )
+    }
 
-    // MARK: Internal
-
-    var usersListBuilder: UsersListBuildable {
+    public var usersListBuilder: UsersListBuildable {
         UsersListBuilder(dependency: self)
+    }
+    
+    public var userDetailBuilder: UserDetailBuildable {
+        UserDetailBuilder(dependency: self)
     }
 
 }

@@ -3,10 +3,8 @@
 //  UserDetail
 //
 
-import RandomUserData
 import RandomUserDomain
 import RUCCore
-import RUCNetwork
 
 // MARK: - UserDetailDependency
 

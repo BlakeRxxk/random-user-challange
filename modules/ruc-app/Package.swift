@@ -7,7 +7,6 @@ let package = Package(
     name: "ruc-app",
     platforms: [.iOS(.v17)],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(name: "RUCApp", targets: ["RUCApp"]),
         .library(name: "UsersList", targets: ["UsersList"]),
         .library(name: "UserDetail", targets: ["UserDetail"]),
@@ -19,12 +18,11 @@ let package = Package(
         .package(name: "RUCUI", path: "../ruc-ui"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "RUCApp",
             dependencies: [
                 "UsersList",
+                "RandomUserData",
                 .product(name: "RUCNetwork", package: "RUCCore"),
                 .product(name: "RUCCore", package: "RUCCore"),
             ],
@@ -35,9 +33,7 @@ let package = Package(
                 "RUCUI",
                 "UserDetail",
                 "RandomUserDomain",
-                "RandomUserData",
                 .product(name: "RUCCore", package: "RUCCore"),
-                .product(name: "RUCNetwork", package: "RUCCore"),
             ],
         ),
         .target(
@@ -45,9 +41,7 @@ let package = Package(
             dependencies: [
                 "RUCUI",
                 "RandomUserDomain",
-                "RandomUserData",
                 .product(name: "RUCCore", package: "RUCCore"),
-                .product(name: "RUCNetwork", package: "RUCCore"),
             ],
         ),
         .target(name: "RandomUserDomain"),

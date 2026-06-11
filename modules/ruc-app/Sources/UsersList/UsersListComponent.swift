@@ -3,39 +3,34 @@
 //  UsersList
 //
 
-import RandomUserData
 import RandomUserDomain
 import RUCCore
-import RUCNetwork
 import UserDetail
 
 // MARK: - UsersListDependency
 
 @MainActor
 public protocol UsersListDependency: Dependency {
-    var networkClient: HTTPClientProtocol { get }
+    var usersRepository: RandomUserRepository { get }
+    var userDetailBuilder: UserDetailBuildable { get }
 }
 
 // MARK: - UsersListComponent
 
-public final class UsersListComponent: Component<UsersListDependency>, UserDetailDependency {
+public final class UsersListComponent: Component<UsersListDependency> {
 
     // MARK: Public
 
     public var usersRepository: RandomUserRepository {
         shared {
-            RandomUserRepositoryImplementation(
-                networkClient: .init(httpClient: dependency.networkClient),
-                storage: InMemoryUserStorage(),
-            )
-//            RandomUserAPIClient(httpClient: dependency.networkClient)
+            dependency.usersRepository
         }
     }
 
     // MARK: Internal
 
     var userDetailBuilder: UserDetailBuildable {
-        UserDetailBuilder(dependency: self)
+        dependency.userDetailBuilder
     }
 
 }
