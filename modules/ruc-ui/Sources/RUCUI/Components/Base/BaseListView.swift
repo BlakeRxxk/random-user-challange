@@ -29,7 +29,7 @@ open class BaseListView: View {
             frame: bounds,
             collectionViewLayout: layout,
         )
-
+        
         guard let collectionView else { return }
         addSubview(collectionView)
     }
