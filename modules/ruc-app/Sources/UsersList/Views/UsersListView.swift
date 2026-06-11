@@ -33,7 +33,7 @@ public final class UsersListView: BaseListView {
     }
 
     private func configureRefreshControl() {
-//        refreshControl.tintColor = .text(.secondary)
+        refreshControl.tintColor = .foreground(.refreshControl)
         collectionView?.refreshControl = refreshControl
     }
 
