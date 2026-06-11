@@ -19,9 +19,15 @@ open class BaseListView: View {
     // MARK: Open
 
     open func createUI() {
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        config.showsSeparators = true
+        config.separatorConfiguration.color = UIColor.border(.subtle)
+        config.separatorConfiguration.topSeparatorVisibility = .hidden
+        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        
         collectionView = UICollectionView(
             frame: bounds,
-            collectionViewLayout: .defaultLayout(),
+            collectionViewLayout: layout,
         )
 
         guard let collectionView else { return }
