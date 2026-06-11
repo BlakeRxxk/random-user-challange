@@ -29,8 +29,6 @@ struct UserView: SwiftUI.View {
 
     weak var output: UserViewOutput?
 
-    var viewModel: UserCellModel
-
     var body: some SwiftUI.View {
         Button {
             output?.didTapButton(with: viewModel)
@@ -42,7 +40,11 @@ struct UserView: SwiftUI.View {
                 Image(systemName: "chevron.right")
                     .font(.system(size: 16, weight: .semibold))
             }
-        }
+        }.buttonStyle(.plain)
     }
+
+    // MARK: Private
+
+    private var viewModel: UserCellModel
 
 }
