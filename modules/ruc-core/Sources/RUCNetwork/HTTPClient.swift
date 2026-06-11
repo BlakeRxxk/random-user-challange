@@ -48,14 +48,13 @@ public final class HTTPClient: HTTPClientProtocol {
     private let decoder: JSONDecoder
     private let logger: Logger
 
-    private func urlRequest(method: HTTPMethod, route: Routable, parameters: [String: Any]? = nil, requestBody: [String: Any]? = nil) -> URLRequest {
+    private func urlRequest(method: HTTPMethod, route: Routable, parameters: [String: Any]? = nil) -> URLRequest {
         var request = URLRequest(url: route.url)
         request.httpMethod = method.rawValue
 
         for (key, value) in route.extraHTTPHeaders {
             request.setValue(value, forHTTPHeaderField: key)
         }
-        request.httpBody = try? JSONSerialization.data(withJSONObject: requestBody ?? [:])
 
         return apiURLEncodedInURL(request: request, parameters: parameters).0
     }
