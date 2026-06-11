@@ -32,11 +32,18 @@ let package = Package(
             name: "UsersList",
             dependencies: [
                 "RUCUI",
+                "RandomUserDomain",
+                "RandomUserData",
                 .product(name: "RUCCore", package: "RUCCore"),
+                .product(name: "RUCNetwork", package: "RUCCore"),
             ],
         ),
         .target(name: "RandomUserDomain"),
-        .target(name: "RandomUserData", dependencies: ["RandomUserDomain"]),
+        .target(name: "RandomUserData", dependencies: [
+            "RandomUserDomain",
+            .product(name: "RUCCore", package: "RUCCore"),
+            .product(name: "RUCNetwork", package: "RUCCore"),
+        ]),
         .testTarget(
             name: "RUCAppTests",
             dependencies: ["RUCApp"],

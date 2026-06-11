@@ -20,7 +20,8 @@ public final class UsersListBuilder: Builder<UsersListDependency>, UsersListBuil
 
         let viewController = UsersListViewController()
         let interactor = UsersListInteractor(
-            presenter: viewController
+            usersRepository: component.usersRepository,
+            presenter: viewController,
         )
 
         interactor.listener = listener

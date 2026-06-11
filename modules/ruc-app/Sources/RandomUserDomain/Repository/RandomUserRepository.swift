@@ -5,6 +5,7 @@
 
 import Foundation
 
-public protocol RandomUserRepository: Sendable {
+public protocol RandomUserRepository: AnyObject, Sendable {
     func fetchUsers(page: Int, results: Int) async throws -> [User]
+    func searchUsers(query: String) async throws -> [User]
 }

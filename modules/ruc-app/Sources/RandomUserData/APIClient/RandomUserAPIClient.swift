@@ -9,7 +9,7 @@ import RUCNetwork
 
 // MARK: - RandomUserAPIClient
 
-public final class RandomUserAPIClient {
+public final class RandomUserAPIClient: Sendable {
 
     // MARK: Lifecycle
 
@@ -25,16 +25,17 @@ public final class RandomUserAPIClient {
 
 // MARK: RandomUserRepository
 
-extension RandomUserAPIClient: RandomUserRepository {
-    public func fetchUsers(page: Int, results: Int) async throws -> [User] {
+extension RandomUserAPIClient {
+    public func fetchUsers(page: Int, results: Int) async throws -> [UserDTO] {
         var parameters: [String: Any] = [
             "page": page,
             "results": results,
             "seed": "abc",
+            "nat": "de",
         ]
 
         let response: RandomUserResponseDTO = try await httpClient.request(.get, RandomUserAPI.userList, parameters: parameters)
 
-        return UserMapper.map(response)
+        return response.results
     }
 }

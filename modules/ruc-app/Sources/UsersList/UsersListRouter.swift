@@ -20,4 +20,18 @@ protocol UsersListViewControllable: ViewControllable { }
 // MARK: - UsersListRouter
 
 @MainActor
-final class UsersListRouter: ViewableRouter<UsersListInteractor, UsersListViewController>, UsersListRouting { }
+final class UsersListRouter: ViewableRouter<UsersListInteractor, UsersListViewController>  {
+    
+    override init(
+        interactor: UsersListInteractor,
+        viewController: UsersListViewController) {
+            super.init(interactor: interactor, viewController: viewController)
+            interactor.router = self
+        }
+}
+
+extension UsersListRouter: UsersListRouting {
+    func routeToDetail(for userID: String) {
+        print(userID)
+    }
+}
