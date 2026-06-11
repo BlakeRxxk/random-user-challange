@@ -36,6 +36,14 @@ let package = Package(
                 .product(name: "RUCCore", package: "RUCCore"),
             ],
         ),
+        .testTarget(
+            name: "UsersListTests",
+            dependencies: [
+                "UsersList",
+                "RandomUserDomain",
+                .product(name: "RUCCore", package: "RUCCore"),
+            ],
+        ),
         .target(
             name: "UserDetail",
             dependencies: [

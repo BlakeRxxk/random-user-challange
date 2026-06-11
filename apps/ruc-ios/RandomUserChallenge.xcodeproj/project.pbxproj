@@ -30,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AACC61A72FDB470500926FF4 /* RandomUserChallenge.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RandomUserChallenge.xctestplan; sourceTree = "<group>"; };
 		AACF7A312FD98B4700FB1D57 /* RandomUserChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomUserChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AACF7A4A2FD98B4900FB1D57 /* RandomUserChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RandomUserChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AACF7A542FD98B4900FB1D57 /* RandomUserChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RandomUserChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +98,7 @@
 		AACF7A282FD98B4700FB1D57 = {
 			isa = PBXGroup;
 			children = (
+				AACC61A72FDB470500926FF4 /* RandomUserChallenge.xctestplan */,
 				AACF7A332FD98B4700FB1D57 /* Sources */,
 				AACF7A4D2FD98B4900FB1D57 /* Tests */,
 				AACF7A572FD98B4900FB1D57 /* UITests */,
@@ -499,7 +501,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = personal.blakerxxk.com.RandomUserChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -520,7 +522,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = personal.blakerxxk.com.RandomUserChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -540,6 +542,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = personal.blakerxxk.com.RandomUserChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -559,6 +562,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = personal.blakerxxk.com.RandomUserChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

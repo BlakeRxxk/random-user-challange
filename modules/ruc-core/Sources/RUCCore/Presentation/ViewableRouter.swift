@@ -32,11 +32,7 @@ open class ViewableRouter <
 
     public init(interactor: InteractorType, viewController: ViewControllerType) {
         self.viewController = viewController
-        guard let viewControllable = viewController as? ViewControllable else {
-            fatalError("\(viewController) should conform to \(ViewControllable.self)")
-        }
-        self.viewControllable = viewControllable
-
+        viewControllable = viewController
         super.init(interactor: interactor)
     }
 

@@ -31,7 +31,7 @@ extension RandomUserRepositoryImplementation: RandomUserRepository {
         let usersDTO = try await networkClient.fetchUsers(page: page, results: results)
         let users = usersDTO.compactMap(UserMapper.map)
         if page == 1 {
-            try await storage.clear()
+            await storage.clear()
         }
         try await storage.save(users)
         return try await storage.loadUsers()

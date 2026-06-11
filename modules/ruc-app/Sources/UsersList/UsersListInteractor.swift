@@ -12,7 +12,7 @@ import UserDetail
 public protocol UsersListListener: AnyObject { }
 
 // MARK: - UsersListRouting
-
+@MainActor
 public protocol UsersListRouting: ViewableRouting {
     func routeToDetail(for userID: String)
     func dismissUserDetail()
@@ -113,16 +113,10 @@ extension UsersListInteractor: UsersListPresentableListener {
     func delete(user userID: String) {
         deletionTask?.cancel()
         deletionTask = Task { [weak usersRepository] in
-            do {
-                let result = try await usersRepository?.deleteUser(with: userID)
-                let models = result?.compactMap(UserCellModel.init) ?? []
-                await MainActor.run {
-                    presenter.display(users: models)
-                }
-            } catch {
-                await MainActor.run {
-                    presenter.displayError()
-                }
+            let result = await usersRepository?.deleteUser(with: userID)
+            let models = result?.compactMap(UserCellModel.init) ?? []
+            await MainActor.run {
+                presenter.display(users: models)
             }
         }
     }

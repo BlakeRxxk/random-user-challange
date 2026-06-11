@@ -27,7 +27,7 @@ public final class RandomUserAPIClient: Sendable {
 
 extension RandomUserAPIClient {
     public func fetchUsers(page: Int, results: Int) async throws -> [UserDTO] {
-        var parameters: [String: Any] = [
+        let parameters: [String: Any] = [
             "page": page,
             "results": results,
             "seed": "abc",
