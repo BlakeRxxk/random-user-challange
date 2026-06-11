@@ -7,7 +7,7 @@ import Foundation
 
 public protocol HTTPClientProtocol: Sendable {
 
-    init(configuration: URLSessionConfiguration, decoder: JSONDecoder, logger: Logger)
+    init(configuration: URLSessionConfiguration, decoder: JSONDecoder)
 
     func request<Response: Decodable>(
         _ method: HTTPMethod,

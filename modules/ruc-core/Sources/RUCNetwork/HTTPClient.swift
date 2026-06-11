@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import OSLog
 
 // MARK: - HTTPClient
 
@@ -11,10 +12,10 @@ public final class HTTPClient: HTTPClientProtocol {
 
     // MARK: Lifecycle
 
-    public required init(configuration: URLSessionConfiguration, decoder: JSONDecoder, logger: Logger) {
+    public required init(configuration: URLSessionConfiguration, decoder: JSONDecoder) {
         session = URLSession(configuration: configuration)
         self.decoder = decoder
-        self.logger = logger
+        self.logger = Logger()
     }
 
     // MARK: Public
@@ -37,7 +38,7 @@ public final class HTTPClient: HTTPClientProtocol {
         do {
             return try decoder.decode(T.self, from: data)
         } catch {
-            logger.log("\(error)", level: .debug)
+            logger.debug("\(error)")
             throw error
         }
     }

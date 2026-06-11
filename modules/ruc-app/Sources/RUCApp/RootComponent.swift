@@ -27,7 +27,7 @@ public final class RootComponent: Component<RootDependency>, UsersListDependency
             configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            return HTTPClient(configuration: configuration, decoder: decoder, logger: OSLogger())
+            return HTTPClient(configuration: configuration, decoder: decoder)
         }
     }
 
