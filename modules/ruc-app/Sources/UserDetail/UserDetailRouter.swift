@@ -33,4 +33,4 @@ final class UserDetailRouter: ViewableRouter<UserDetailInteractor, UserDetailVie
 
 // MARK: UserDetailRouting
 
-extension UserDetailRouter: UserDetailRouting {}
+extension UserDetailRouter: UserDetailRouting { }

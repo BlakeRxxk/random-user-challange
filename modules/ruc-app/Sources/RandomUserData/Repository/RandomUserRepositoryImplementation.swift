@@ -39,7 +39,11 @@ extension RandomUserRepositoryImplementation: RandomUserRepository {
         try await storage.search(query: query)
     }
 
-    public func deleteUser(with id: String) async throws -> [User] {
-        await storage.delete(userID: id)
+    public func deleteUser(with id: String) async -> [User] {
+        await storage.delete(userId: id)
+    }
+
+    public func fetchUser(with id: String) async throws -> User? {
+        try await storage.get(userId: id)
     }
 }

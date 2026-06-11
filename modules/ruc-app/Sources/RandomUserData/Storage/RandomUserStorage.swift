@@ -10,5 +10,6 @@ public protocol RandomUserStorage: Sendable {
     func save(_ users: [User]) async throws
     func loadUsers() async throws -> [User]
     func search(query: String) async throws -> [User]
-    func delete(userID: String) async -> [User]
+    func delete(userId: String) async -> [User]
+    func get(userId: String) async throws -> User?
 }

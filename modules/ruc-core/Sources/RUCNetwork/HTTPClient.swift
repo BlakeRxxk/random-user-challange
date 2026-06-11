@@ -15,7 +15,7 @@ public final class HTTPClient: HTTPClientProtocol {
     public required init(configuration: URLSessionConfiguration, decoder: JSONDecoder) {
         session = URLSession(configuration: configuration)
         self.decoder = decoder
-        self.logger = Logger()
+        logger = Logger()
     }
 
     // MARK: Public

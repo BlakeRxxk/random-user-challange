@@ -11,7 +11,7 @@ public struct AvatarView: SwiftUI.View {
 
     // MARK: Lifecycle
 
-    init(url: URL? = nil, name: String) {
+    public init(url: URL? = nil, name: String) {
         self.url = url
         self.name = name
     }

@@ -2,6 +2,7 @@
 //  UserDetailViewController.swift
 //  UserDetail
 //
+
 import RUCCore
 import RUCUI
 import UIKit
@@ -34,9 +35,7 @@ public final class UserDetailViewController: ViewController<UserDetailView>, Use
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-
-        specializedView.backgroundColor = .cyan
-
+        title = Localized.title
         addCloseButtonIfNeeded(target: self, action: #selector(handleClose))
         navigationController?.presentationController?.delegate = self
     }
@@ -52,12 +51,24 @@ public final class UserDetailViewController: ViewController<UserDetailView>, Use
 
 // MARK: UserDetailPresentable
 
-extension UserDetailViewController: UserDetailPresentable { }
+extension UserDetailViewController: UserDetailPresentable {
+    public func display(user: UserDetailDisplayModel) {
+        specializedView.model.displayModel = user
+    }
+}
 
 // MARK: UIAdaptivePresentationControllerDelegate
 
 extension UserDetailViewController: UIAdaptivePresentationControllerDelegate {
     public func presentationControllerWillDismiss(_: UIPresentationController) {
         listener?.onDismiss()
+    }
+}
+
+// MARK: UserDetailViewController.Localized
+
+extension UserDetailViewController {
+    fileprivate enum Localized {
+        static let title = "User Details".localize()
     }
 }

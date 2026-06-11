@@ -15,11 +15,12 @@ public protocol UserDetailBuildable {
 // MARK: - UserDetailBuilder
 
 public final class UserDetailBuilder: Builder<UserDetailDependency>, UserDetailBuildable {
-    public func build(with listener: some UserDetailListener, selected _: String) -> UserDetailRouting {
+    public func build(with listener: some UserDetailListener, selected userID: String) -> UserDetailRouting {
         let component = UserDetailComponent(dependency: dependency)
 
         let viewController = UserDetailViewController()
         let interactor = UserDetailInteractor(
+            selectedUser: userID,
             usersRepository: component.usersRepository,
             presenter: viewController,
         )
