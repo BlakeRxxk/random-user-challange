@@ -5,7 +5,7 @@
 
 import RUCCore
 
-final class InteractableMock: @unchecked Interactable {
+final class InteractableMock: Interactable, @unchecked Sendable {
     var isActive = false
     var lifecycleStream: AsyncStream<LifecycleState> = AsyncStream { _ in }
 

@@ -35,7 +35,7 @@ final class UsersListInteractorTests: XCTestCase {
     }
 
     func test_fetchUsers_resetsPageToOne() async {
-        // Given — simulate being on page 3
+        // Given
         let users = User.makeList(40)
         repository.fetchUsersResult = .success(users)
         sut.fetchUsers()
@@ -47,7 +47,7 @@ final class UsersListInteractorTests: XCTestCase {
         sut.fetchUsers()
         await Task.yield()
 
-        // Then — last call should be page 1 again
+        // Then
         XCTAssertEqual(repository.fetchUsersReceivedPages.last, 1)
     }
 
@@ -69,21 +69,21 @@ final class UsersListInteractorTests: XCTestCase {
     }
 
     func test_fetchNextPageUsers_doesNotFetch_whileLoading() async {
-        // Given — trigger page 1, don't yield so it's still in flight
+        // Given
         let users = User.makeList(40)
         repository.fetchUsersResult = .success(users)
         sut.fetchUsers()
 
-        // When — try to load next page immediately
+        // When
         sut.fetchNextPageUsers()
         await Task.yield()
 
-        // Then — only one fetch call
+        // Then
         XCTAssertEqual(repository.fetchUsersCallCount, 1)
     }
 
     func test_fetchNextPageUsers_stopsWhenNoMore() async {
-        // Given — server returns fewer than page size (last page)
+        // Given
         let users = User.makeList(10)
         repository.fetchUsersResult = .success(users)
         sut.fetchUsers()
@@ -93,12 +93,12 @@ final class UsersListInteractorTests: XCTestCase {
         sut.fetchNextPageUsers()
         await Task.yield()
 
-        // Then — no second fetch
+        // Then
         XCTAssertEqual(repository.fetchUsersCallCount, 1)
     }
 
     func test_fetchNextPageUsers_doesNotFetch_afterReset() async {
-        // Given — reach page 2
+        // Given
         let users = User.makeList(40)
         repository.fetchUsersResult = .success(users)
         sut.fetchUsers()
@@ -106,12 +106,12 @@ final class UsersListInteractorTests: XCTestCase {
         sut.fetchNextPageUsers()
         await Task.yield()
 
-        // When — refresh resets, then next page fires before task settles
+        // When
         sut.fetchUsers()
-        sut.fetchNextPageUsers() // should be blocked by isLoading
+        sut.fetchNextPageUsers()
         await Task.yield()
 
-        // Then — page 1 again, not page 3
+        // Then
         XCTAssertEqual(repository.fetchUsersReceivedPages.last, 1)
     }
 
@@ -121,8 +121,7 @@ final class UsersListInteractorTests: XCTestCase {
 
         // When
         sut.search(with: "Alice")
-        // wait for debounce (300ms) + task
-        try? await Task.sleep(nanoseconds: 350_000_000)
+        try? await Task.sleep(for: .milliseconds(350))
 
         // Then
         XCTAssertEqual(repository.searchUsersCallCount, 1)
@@ -134,15 +133,13 @@ final class UsersListInteractorTests: XCTestCase {
         // Given
         repository.searchUsersResult = .success([])
 
-        // When — rapid inputs
-        sut.search(with: "A")
-        sut.search(with: "Al")
-        sut.search(with: "Ali")
-        sut.search(with: "Alic")
-        sut.search(with: "Alice")
-        try? await Task.sleep(nanoseconds: 350_000_000)
+        // When
+        for query in ["A", "Al", "Ali", "Alic", "Alice"] {
+            sut.search(with: query)
+        }
+        try? await Task.sleep(for: .milliseconds(350))
 
-        // Then — only last query hits repository
+        // Then
         XCTAssertEqual(repository.searchUsersCallCount, 1)
         XCTAssertEqual(repository.searchUsersReceivedQuery, "Alice")
     }
@@ -153,7 +150,7 @@ final class UsersListInteractorTests: XCTestCase {
 
         // When
         sut.search(with: "fail")
-        try? await Task.sleep(nanoseconds: 350_000_000)
+        try? await Task.sleep(for: .milliseconds(350))
 
         // Then
         XCTAssertEqual(presenter.displayErrorCallCount, 1)
@@ -166,7 +163,7 @@ final class UsersListInteractorTests: XCTestCase {
 
         // When
         sut.delete(user: "some-id")
-        try? await Task.sleep(nanoseconds: 350_000_000)
+        try? await Task.sleep(for: .milliseconds(350))
 
         // Then
         XCTAssertEqual(presenter.lastDisplayedUsers?.count, 2)
