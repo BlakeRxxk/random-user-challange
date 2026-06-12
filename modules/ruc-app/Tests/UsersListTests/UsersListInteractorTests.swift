@@ -193,4 +193,5 @@ final class UsersListInteractorTests: XCTestCase {
     private var presenter: UsersListPresentableMock!
     private var router: UsersListRouterMock!
     private var sut: UsersListInteractor!
+
 }
