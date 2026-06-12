@@ -196,9 +196,4 @@ final class UsersListInteractorTests: XCTestCase {
     private var presenter: UsersListPresentableMock!
     private var router: UsersListRouterMock!
     private var sut: UsersListInteractor!
-
-    private func waitForTasks() async {
-        try? await Task.sleep(nanoseconds: 100_000_000)
-    }
-
 }
